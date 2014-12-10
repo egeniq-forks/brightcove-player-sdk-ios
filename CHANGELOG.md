@@ -1,8 +1,40 @@
-# 4.1.10
+# 4.2.1
+### Breaking Changes
+* iOS 6 is still deprecated in this release. We have not removed support yet.  iOS 6.x currently accounts for ~2% of global SDK traffic.
+* This release has been built with Xcode 6. In Xcode 6, Apple removed armv7s from the list of standard architectures. This release no longer includes an armv7s architecture slice.
+* Use of `BCOVDelegatingSessionConsumer` and `BCOVDelegatingSessionConsumerDelegate` has been deprecated. Delegate methods equivilent to those provided by `BCOVDelegatingSessionConsumerDelegate` have been added to the `BCOVPlaybackSessionConsumer` protocol. Objects should now implement `BCOVPlaybackSessionConsumer` protocol and its methods.
+
+| Deprecated Method (BCOVDelegatingSessionConsumerDelegate)           | Replaced By (BCOVPlaybackSessionConsumer)          |
+| ------------------------------------------------------------------- | -------------------------------------------------- |
+| `playbackConsumer:didAdvanceToPlaybackSession:`                     | `didAdvanceToPlaybackSession:`                     |
+| `playbackConsumer:playbackSession:didChangeDuration:`               | `playbackSession:didChangeDuration:`               |
+| `playbackConsumer:playbackSession:didChangeExternalPlaybackActive:` | `playbackSession:didChangeExternalPlaybackActive:` |
+| `playbackConsumer:playbackSession:didPassCuePoints:`                | `playbackSession:didPassCuePoints:`                |
+| `playbackConsumer:playbackSession:didProgressTo:`                   | `playbackSession:didProgressTo:`                   |
+| `playbackConsumer:playbackSession:didReceiveLifecycleEvent:`        | `playbackSession:didReceiveLifecycleEvent:`        |
+
+* `[<BCOVPlaybackSessionConsumer> consumeSession:]` method has been deprecated.  Use `[<BCOVPlaybackSessionConsumer> didAdvanceToSession:]` instead.
 
 ### Additions and Improvements
-* Fixed a bug that prevented the app bundle from showing up in the Videocloud Analytics UI.
-* Internal improvements
+* Fixed a bug that prevented plugins from cleaning up correctly.
+* Fixed a bug where didProgressTo delegate methods weren't called after a seek if the player is paused.
+* Performance and object allocation improvements.
+
+# 4.2.0
+
+### Breaking Changes
+* iOS 6 is still deprecated in this release. We have not removed support yet.
+* All deprecated symbols within the Player SDK for iOS have been removed from this release.
+* Use of ReactiveCocoa in public APIs within the Player SDK for iOS has been removed from this release.
+* If using Cocoapods, ReactiveCocoa will no longer be installed by including our library. Running `pod update` to update to 4.2 will remove it. If you wish to continue using ReactiveCocoa for your own use, you will need to declare ReacticeCocoa in your podfile.
+* If you installed ReactiveCocoa manually in your project, it can be removed. To remove it, you will need to at least perform the following:
+    * Remove any "Target Dependencies" on ReactiveCocoa.
+    * Remove any ReactiveCocoa references from the "Header Search Paths".
+    * Remove libReactiveCocoa-iOS.a from the "Link Binary With Libraries" phase.
+    * Remove the ReactiveCocoa.xcodeproj from your project or workspace.
+
+### Additions and Improvements
+* Fixed a bug that could cause sessions to leak if a playback controller is deallocated immediately after calling `-setVideos:`.
 
 # 4.1.9
 

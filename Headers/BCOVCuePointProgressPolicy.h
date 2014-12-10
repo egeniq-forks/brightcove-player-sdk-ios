@@ -69,7 +69,7 @@ typedef NS_ENUM(NSInteger, BCOVProgressPolicyResumePosition) {
      * Configures the cue point progress policy to resume from the last
      * processed cue point position, once all cue points have been processed.
      * For example, if a seek occurs from 0:00 to 2:00, and there are three cue
-     * poinmts with positions at 0:30, 1:00, and 1:30, the policy will instruct
+     * points with positions at 0:30, 1:00, and 1:30, the policy will instruct
      * its caller to resume content playback at 1:31.
      */
     BCOVProgressPolicyResumeFromLastProcessedCuePoint
@@ -96,7 +96,7 @@ typedef NS_ENUM(NSInteger, BCOVProgressPolicyResumePosition) {
 /**
  * Returns a BCOVCuePointProgressPolicyResult that specifies which cue points
  * are to be processed by the code consulting this policy, as well as the
- * position at which playback should resume once all cue points ahve been
+ * position at which playback should resume once all cue points have been
  * processed.
  *
  * This method is called by the consumer of the cue point progress policy. In
@@ -112,7 +112,8 @@ typedef NS_ENUM(NSInteger, BCOVProgressPolicyResumePosition) {
 - (BCOVCuePointProgressPolicyResult *)applyToEvent:(NSDictionary *)cuePointEvent;
 
 /**
- * Convenience factory method that returns a cue point progress policy configured according to the specified parameters.
+ * Convenience factory method that returns a cue point progress policy
+ * configured according to the specified parameters.
  *
  * @param cuePointsToProcess A BCOVProgressPolicyCuePointsToProcess that
  * configures the returned policy to tell its caller which cue points should be
@@ -163,12 +164,5 @@ typedef NS_ENUM(NSInteger, BCOVProgressPolicyResumePosition) {
  * specified by a BCOVCuePointProgressPolicy.
  */
 @property (nonatomic, copy, readonly) BCOVCuePointCollection *cuePoints;
-
-@end
-
-
-@interface BCOVCuePointProgressPolicy (Deprecated)
-
-- (RACSignal *)signalWithValue:(NSDictionary *)cuePointEvent __attribute((deprecated("Use -[BCOVCuePointProgressPolicy applyToEvent:] instead")));
 
 @end
