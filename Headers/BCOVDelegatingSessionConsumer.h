@@ -16,12 +16,7 @@
  * This is a simple implementation of the session consumer protocol that
  * provides convenient delegate methods for accessing session information.
  */
-__deprecated
 @interface BCOVDelegatingSessionConsumer : NSObject <BCOVPlaybackSessionConsumer>
-
-@end
-
-@interface BCOVDelegatingSessionConsumer (Deprecated)
 
 /**
  * Designated initializer. When this objected is added as a session consumer to
@@ -31,7 +26,7 @@ __deprecated
  * @param delegate Delegate for this consumer.
  * @return Initialized instance.
  */
--(instancetype)initWithDelegate:(id<BCOVDelegatingSessionConsumerDelegate>)delegate __deprecated;
+-(instancetype)initWithDelegate:(id<BCOVDelegatingSessionConsumerDelegate>)delegate;
 
 @end
 
@@ -46,7 +41,6 @@ __deprecated
  * flexibility. This delegate is intended for clients who do not wish to use
  * signals directly.
  */
-__deprecated
 @protocol BCOVDelegatingSessionConsumerDelegate <NSObject>
 
 @optional
